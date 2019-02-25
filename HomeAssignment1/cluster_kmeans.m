@@ -3,10 +3,18 @@ function [clusters, means_new] = cluster_kmeans(data, K)
     [N, D] = size(data);
     % Creating random means within data range
     means_old = zeros(K, D);
-    for i = 1:D
-        column = max(data(:,i)) - min(data(:,i)) * rand(K,1) + min(data(:,i));
-        means_old(:,i) = column;
+    
+    % If we select uniform random value as initial mean, then error rate 30%
+    %for i = 1:D
+    %    column = max(data(:,i)) - min(data(:,i)) * rand(K,1) + min(data(:,i));
+    %    means_old(:,i) = column;
+    %end
+    
+    % If we select random mean from initial dataset, then error rate 10%
+    for i = 1:K
+        means_old(:,i) = data(randi(N),:);
     end
+    
     means_new = means_old; % Used to check ending condition
     clusters = zeros(N,1); % Initially data unclustered
     distances = Inf(N, 1); % Initial distance at infinity
