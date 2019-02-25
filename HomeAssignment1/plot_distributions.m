@@ -1,5 +1,5 @@
-function results = plot_entropy(data)
-    figure('Name',  'Entropy');
+function results = plot_distributions(data)
+    figure('Name',  'Distributions');
     % Simple round function to create bins
     data = round(data);
     c = size(data, 2);
@@ -17,7 +17,7 @@ function results = plot_entropy(data)
         results(i,1) = e_sum;
         
         % Draw plot
-        sgtitle('Entropy');
+        sgtitle('Distributions');
         subplot(1,c,i);
         bar(values, probabilities);
         title(strcat('Feature ', num2str(i)));

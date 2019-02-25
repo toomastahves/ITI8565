@@ -4,8 +4,8 @@ clear
 % Generate data N = 100 in each cluster, total 3 * 100 = 300 points
 data = generate_data(100);
 
-% Calculate entropies and draw plot
-entropies = plot_entropy(data);
+% Calculate entropies and draw distributions plot
+entropies = plot_distributions(data);
 
 % Calculate K-means labels and draw plot for K = 3
 plot3d_kmeans(data, 3);
