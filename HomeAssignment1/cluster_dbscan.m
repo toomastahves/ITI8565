@@ -1,5 +1,5 @@
 % DBSCAN implementation
-function labels = cluster_dbscan(data, eps, minpts)
+function [labels, means] = cluster_dbscan(data, eps, minpts)
     N = size(data, 1);
     C = 0; % Initiating cluster index
     labels = zeros(N, 1);
@@ -20,6 +20,7 @@ function labels = cluster_dbscan(data, eps, minpts)
             end
         end
     end
+    means = calculateMeans(labels, data);
     disp('DBSCAN finished.');
 end
 
@@ -57,5 +58,16 @@ function neighbors = findNeighbors(points, p, eps)
         if d < eps
             neighbors = [neighbors; q]; % Last value is index
         end
+    end
+end
+
+% https://blogs.mathworks.com/loren/2008/02/20/under-appreciated-accumarray/
+function means = calculateMeans(labels, data)
+    indices = [labels ones(size(labels))];
+    [~, col] = size(data);
+    means = [];
+    for i = 1:col
+        res = accumarray(indices, data(:,i), [numel(unique(labels)) 1], @mean);
+        means(:,i) = res;
     end
 end

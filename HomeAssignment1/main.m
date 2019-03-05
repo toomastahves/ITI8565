@@ -8,7 +8,7 @@ data = generate_data(100);
 entropies = plot_distributions(data);
 
 % Calculate K-means labels and draw plot for K = 3
-plot3d_kmeans(data, 3);
+means1 = plot3d_kmeans(data, 3);
 
 % Calculate DBSCAN labels and draw plot for eps = 20 and minpts = 10
-plot3d_dbscan(data, 20, 10);
+means2 = plot3d_dbscan(data, 20, 10);
