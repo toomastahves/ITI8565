@@ -1,20 +1,7 @@
 % K-means implementation
 function [clusters, means_new] = cluster_kmeans(data, K)
-    [N, D] = size(data);
-    % Creating random means within data range
-    means_old = zeros(K, D);
-    
-    % If we select uniform random value as initial mean, then error rate 30%
-    %for i = 1:D
-    %    column = max(data(:,i)) - min(data(:,i)) * rand(K,1) + min(data(:,i));
-    %    means_old(:,i) = column;
-    %end
-    
-    % If we select random mean from initial dataset, then error rate 10%
-    for i = 1:K
-        means_old(:,i) = data(randi(N),:);
-    end
-    
+    [N, ~] = size(data);
+    means_old = choose_best_means(data, K); % K-means++
     means_new = means_old; % Used to check ending condition
     clusters = zeros(N,1); % Initially data unclustered
     distances = Inf(N, 1); % Initial distance at infinity
@@ -55,6 +42,38 @@ function [clusters, means_new] = cluster_kmeans(data, K)
         if isequal(round(means_old,4), round(means_new,4))
             disp('K-means finished.');
             break;
+        end
+    end
+end
+
+function means = choose_best_means(data, K)
+    [N, ~] = size(data);
+    distances = zeros(N, 2);
+    % 1. Choose random mean
+    means(1,:) = data(randi(N),:);
+    for j = 2:K
+        % 2. Calculate distances to closest mean
+        for i = 1:N
+            distances(i, 1) = find_closest_center(means, data(i,:));
+        end
+        % 3. New center
+        sum_d = sum(distances(:, 1));
+        for i = 1:N
+            distances(i, 2) = distances(i, 1) / sum_d;
+        end
+        [~, idx] = max(distances(:,2));
+        means(j,:) = data(idx,:);
+        % 4. Repeat 2. and 3.
+    end
+end
+
+function [min_dist] = find_closest_center(means, point)
+    min_dist = Inf;
+    [N, ~] = size(means);
+    for i = 1:N
+        dist = sum((means(i,:) - point).^2);
+        if dist < min_dist
+            min_dist = dist;
         end
     end
 end

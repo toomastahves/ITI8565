@@ -1,3 +1,4 @@
+% Returns distance between point1 and point2
 function dist = distance_minkowski(point1, point2, p)
     if p == Inf
         % Chebyshev distance

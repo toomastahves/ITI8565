@@ -1,4 +1,4 @@
-function [means] = plot3d_dbscan(data, eps, minpts)
+function [labels, means] = plot3d_dbscan(data, eps, minpts)
     figure('Name', 'DBSCAN');
     [labels, means] = cluster_dbscan(data, eps, minpts);
     scatter3(data(:,1), data(:,2), data(:,3), 10, labels/3);

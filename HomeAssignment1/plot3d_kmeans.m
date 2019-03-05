@@ -1,4 +1,4 @@
-function [means] = plot3d_kmeans(data, K)
+function [labels, means] = plot3d_kmeans(data, K)
     figure('Name',  'K-means');
     [labels, means] = cluster_kmeans(data, K);
     scatter3(data(:,1), data(:,2), data(:,3), 10, labels/3);
