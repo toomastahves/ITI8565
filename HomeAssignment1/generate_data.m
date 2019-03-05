@@ -1,3 +1,4 @@
+% Generates uniform data in three clusters
 function data = generate_data(N)
     mult = 10;
     off = 5;

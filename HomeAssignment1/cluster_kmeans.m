@@ -1,4 +1,4 @@
-% K-means implementation
+% K-means++ implementation
 function [clusters, means_new] = cluster_kmeans(data, K)
     [N, ~] = size(data);
     means_old = choose_best_means(data, K); % K-means++
@@ -46,6 +46,7 @@ function [clusters, means_new] = cluster_kmeans(data, K)
     end
 end
 
+% Finds and returns best mean values for clustering
 function means = choose_best_means(data, K)
     [N, ~] = size(data);
     distances = zeros(N, 2);
@@ -56,7 +57,7 @@ function means = choose_best_means(data, K)
         for i = 1:N
             distances(i, 1) = find_closest_center(means, data(i,:));
         end
-        % 3. New center
+        % 3. Choose next mean
         sum_d = sum(distances(:, 1));
         for i = 1:N
             distances(i, 2) = distances(i, 1) / sum_d;
@@ -67,6 +68,7 @@ function means = choose_best_means(data, K)
     end
 end
 
+% Calculates distance to closest mean
 function [min_dist] = find_closest_center(means, point)
     min_dist = Inf;
     [N, ~] = size(means);

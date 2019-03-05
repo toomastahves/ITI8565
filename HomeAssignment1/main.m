@@ -8,9 +8,17 @@ data = generate_data(100);
 % Calculate entropies and draw distributions plot
 entropies = plot_distributions(data);
 
-% Calculate K-means labels and draw plot for K = 3
+% Find best K value
 K = find_k_value(data);
-[labels1, means1] = plot3d_kmeans(data, K);
+% Assign data to clusters using K-means
+[labels1, means1] = cluster_kmeans(data, K);
+% Draw 3D scatter plot
+plot3d_scatter(data, labels1, means1, 'K-means');
 
-% Calculate DBSCAN labels and draw plot for eps = 20 and minpts = 10
-[labels2, means2] = plot3d_dbscan(data, 20, 10);
+% Assign eps and minpts values
+minpts = 10;
+eps = 20;
+% Assign data to clusters using DBSCAN
+[labels2, means2] = cluster_dbscan(data, eps, minpts);
+% Draw 3D scatter plot
+plot3d_scatter(data, labels2, means2, 'DBSCAN');

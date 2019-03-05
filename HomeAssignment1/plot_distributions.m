@@ -1,3 +1,4 @@
+% Calculating entropy and drawing distributions plot
 function results = plot_distributions(data)
     figure('Name',  'Distributions');
     % Simple round function to create bins
