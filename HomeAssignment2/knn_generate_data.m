@@ -1,5 +1,5 @@
 % Generates uniform data in three clusters
-function [data, labels] = generate_labeled_data(N, mult, off)
+function [data, labels] = knn_generate_data(N, mult, off)
     cluster1 = [(rand(N,1)-off)*mult, (rand(N,1))*mult, (rand(N,1))*mult];
     cluster2 = [(rand(N,1))*mult, (rand(N,1)-off)*mult, (rand(N,1))*mult];
     cluster3 = [(rand(N,1))*mult, (rand(N,1))*mult, (rand(N,1)-off)*mult];
