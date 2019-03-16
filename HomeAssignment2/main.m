@@ -4,10 +4,9 @@ clear
 
 %[best_accuracy, k] = knn_presentation();
 
-[X, Y] = linreg_generate_data(100, 3);
-[train_data, train_labels, test_data, test_labels] = split_data(X, Y);
-[slope, intercept] = linreg_mean_squares(train_data, train_labels);
-linreg_plot(test_data, test_labels, slope, intercept);
+[X, Y] = linreg_generate_data(100, 2);
+%[slope, intercept] = linreg_mean_squares(X, Y);
+%linreg_plot(X, Y, slope, intercept);
 
-% Quality test
-%R2 = linreg_coefficient_of_determination(test_data, test_labels, slope, intercept)
+%[history_slope, history_intercept, history_cost] = gd_calculate(X, Y, 100, 0.1);
+%gd_plot(X, Y, history_slope, history_intercept);
