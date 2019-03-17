@@ -2,9 +2,9 @@ close all
 clear
 %rng default
 
-%[best_accuracy, k] = knn_presentation();
+%[best_accuracy, k] = knn_main();
 
-[X, Y] = linreg_generate_data(100, 2);
+%[X, Y] = linreg_generate_data(100, 2);
 %[slope, intercept] = linreg_mean_squares(X, Y);
 %linreg_plot(X, Y, slope, intercept);
 

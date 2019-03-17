@@ -20,7 +20,7 @@ function [slope, intercept] = gd_step(X, Y, slope, intercept, rate)
     Y_hat = slope .* X + intercept;
     % Error function to be minimized
     error = (Y - Y_hat) / N;
-    % Partial derivatives of error function
+    % Calculating new values
     slope = slope - (rate * sum(-X .* error));
     intercept = intercept - (rate * sum(-1 .* error));
 end

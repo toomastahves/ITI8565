@@ -1,4 +1,4 @@
-function [best_accuracy, k] = knn_presentation()
+function [best_accuracy, k] = knn_main()
     % Generate data
     [points, labels] = knn_generate_data(100, 10, 0.6);
     % Split data into train and test set
