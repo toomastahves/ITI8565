@@ -1,5 +1,5 @@
 % Calculates coefficient of determination. Used for quality test.
-function R_squared = linreg_coefficient_of_determination(X, Y, slope, intercept) 
+function R_squared = linreg_R_squared(X, Y, slope, intercept) 
     % Total sum of squares
     SS_tot = sum((Y - mean(Y)).^2);
     % Predicted Y value

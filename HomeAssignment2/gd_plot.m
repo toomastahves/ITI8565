@@ -8,7 +8,7 @@ function [] = gd_plot(X, Y, history_slope, history_intercept)
     grid;
     axis equal
     hold on;
-    x = linspace(-3, 3)';
+    x = linspace(-10, 10)';
     for i=1:size(history_slope,1)
         y = history_slope(i) * x + history_intercept(i);
         l = line(x, y);

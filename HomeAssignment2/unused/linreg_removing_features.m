@@ -1,7 +1,7 @@
-% Removing features that have correlation coefficients below threshold
-function [X, Y, corr_matrix] = linreg_removing_features(X, Y, threshold)
+% Removing features that have correlation coefficients above threshold
+function [X, corr_matrix] = linreg_removing_features(X, threshold)
     % Calculating correlation coefficients
-    corr_matrix = linreg_correlation_coefficients(X, Y);
+    corr_matrix = linreg_correlation_coefficients(X);
     % Calculating column indexes that are above threshold
     indexes = corr_matrix(1,:) > threshold;
     % Removing columns in coefficients array

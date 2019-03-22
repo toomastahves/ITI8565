@@ -1,12 +1,11 @@
-% Calculate correlation coefficients for multicollinearity check
-function corr_matrix = linreg_correlation_coefficients(X, Y)
-    Z = [X, Y];
-    N = size(Z, 2);
+% Calculates correlation coefficients for multicollinearity check
+function corr_matrix = linreg_correlation_coefficients(X)
+    N = size(X, 2);
     corr_matrix = zeros(N, N);
     for i=1:N
         for j=1:N
-            numerator = sum((Z(:,i) - mean(Z(:,i))) .* (Z(:,j) - mean(Z(:,j))));
-            denominator = sqrt(sum((Z(:,i) - mean(Z(:,i))).^2)) * sqrt(sum((Z(:,j) - mean(Z(:,j))).^2));
+            numerator = sum((X(:,i) - mean(X(:,i))) .* (X(:,j) - mean(X(:,j))));
+            denominator = sqrt(sum((X(:,i) - mean(X(:,i))).^2)) * sqrt(sum((X(:,j) - mean(X(:,j))).^2));
             corr_matrix(i, j) =  numerator / denominator;
         end
     end

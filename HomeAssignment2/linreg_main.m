@@ -1,3 +1,21 @@
+% Entry point for running linear regression functions
+function [corr_matrix] = linreg_main(X, Y, max_iterations, R_squared_limit, alpha)
+    % Calculate multicollinearity matrix
+    corr_matrix = linreg_correlation_coefficients(X);
+    % Running stepwise regression
+    [R_squared_performance, X, Y, slope, intercept] = linreg_stepwise_regression(X, Y, max_iterations, R_squared_limit, alpha);
+    % Plotting learning rate
+    figure('Name',  'Learning rate');
+    plot(R_squared_performance(:,1), R_squared_performance(:,2));
+    title('Learning rate');
+    xlabel('Iteration number');
+    ylabel('R^2');
+    grid;
+    % Plotting final result
+    figure('Name',  'Stepwise regression');
+    linreg_plot(X, Y, slope, intercept)
+end
+
 % Plotting points and regression line depending on dimension
 function [] = linreg_plot(X, Y, slope, intercept)
     [~, X_dim] = size(X);
@@ -19,10 +37,11 @@ function [] = plot2d(X, Y, slope, intercept)
     xlabel('X');
     ylabel('Y');
     hold on
-    x = linspace(-2, 2)';
+    x = linspace(-10, 10)';
     y = intercept + slope * x;
-    line(x, y)
-    grid
+    line(x, y, 'Color', 'red');
+    title('Stepwise regression');
+    grid;
 end
 
 % Plotting 3D plot
@@ -39,4 +58,5 @@ function [] = plot3d(X, Y, slope, intercept)
     z = slope(1)*x + slope(2)*y + intercept;
     s = surf(x,y,z, 'FaceAlpha',0.5);
     s.EdgeColor = 'none';
+    title('Stepwise regression');
 end
