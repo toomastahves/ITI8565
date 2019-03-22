@@ -18,3 +18,8 @@ function predicted_label = get_predicted_label(train_data, train_labels, point, 
     % Calculate mode label value
     predicted_label = mode(train_labels(neighbor_indexes));
 end
+
+% Single line kNN classifier :)
+function predicted_labels = knn_classifier_single_line(train_data, train_labels, test_data, k)
+    predicted_labels = (arrayfun(@(m) mode(train_labels(arrayfun(@(j) subsref(sortrows([(1:size(train_data, 1))', sqrt(sum((train_data - test_data(m,:)).^2, 2))], 2), struct('type', '()', 'subs', {{j, 1}})), 1:k))), 1:size(test_data, 1)))';
+end
