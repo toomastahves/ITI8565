@@ -6,13 +6,18 @@ function [] = ex4_plot(X, Y, history_slope, history_intercept)
     xlabel('X');
     ylabel('Y');
     grid;
-    axis equal
     hold on;
     x = linspace(-10, 10)';
     for i=1:size(history_slope,1)
         y = history_slope(i) * x + history_intercept(i);
-        l = line(x, y);
-        l.Color = [0,0,0,0.3];
+        l1 = line(x, y);
+        l1.Color = [0,0,0,0.3];
         hold on;
+        
     end
+    % Plot real line
+    y2 = 3 * x + 2;
+    l2 = line(x, y2);
+    l2.Color = [1,0,0];
+    legend(l2, 'Real line');
 end

@@ -20,7 +20,7 @@ function [best_acc, best_k, best_dist] = ex1_find_best_k(train_data, train_label
     best_k = k(idx);
     best_acc = best_accuracy(idx);
     % Plot accuracy
-    %plot_accuracy(accuracy);
+    plot_accuracy(accuracy);
 end
 
 % Plotting k value and accuracy plot
