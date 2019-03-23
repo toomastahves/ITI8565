@@ -3,7 +3,17 @@ clear
 %rng default
 
 % Ex 1
-[best_accuracy, k] = ex1_main();
+% Generate data
+N = 100;
+[points, labels] = ex1_generate_data(N, 2);
+% Split data into train and test set
+[train_data, train_labels, test_data, test_labels] = ex1_split_data(points, labels);
+% Find best k and best distance function according to best accuracy
+[best_acc, best_k, best_dist] = ex1_find_best_k(train_data, train_labels, test_data, test_labels);
+% Predict labels
+predicted_labels = ex1_knn_classifier(train_data, train_labels, test_data, best_k, best_dist);
+% Plot data and predicted labels
+ex1_plot(train_data, train_labels, test_data, test_labels, predicted_labels);
 
 % Ex 2
 % Get decision tree data
