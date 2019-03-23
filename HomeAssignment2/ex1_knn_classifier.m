@@ -1,5 +1,5 @@
 % kNN classifier
-function predicted_labels = knn_classifier(train_data, train_labels, test_data, k)
+function predicted_labels = ex1_knn_classifier(train_data, train_labels, test_data, k)
     N = size(test_data, 1);
     predicted_labels = zeros(N, 1);
     % Predicting labels
@@ -20,6 +20,7 @@ function predicted_label = get_predicted_label(train_data, train_labels, point, 
 end
 
 % Single line kNN classifier :)
+% Not used, too slow
 function predicted_labels = knn_classifier_single_line(train_data, train_labels, test_data, k)
-    predicted_labels = (arrayfun(@(m) mode(train_labels(arrayfun(@(j) subsref(sortrows([(1:size(train_data, 1))', sqrt(sum((train_data - test_data(m,:)).^2, 2))], 2), struct('type', '()', 'subs', {{j, 1}})), 1:k))), 1:size(test_data, 1)))';
+    predicted_labels = (arrayfun(@(m) mode(train_labels(arrayfun(@(j) subsref(sortrows([(1:size(train_data, 1))', sum((train_data - test_data(m,:)).^2, 2)], 2), struct('type', '()', 'subs', {{j, 1}})), 1:k))), 1:size(test_data, 1)))';
 end

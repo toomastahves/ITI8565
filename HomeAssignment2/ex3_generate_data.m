@@ -1,5 +1,5 @@
 % Generates linear data with significant noise
-function [X, Y] = linreg_generate_data(N, dim)
+function [X, Y] = ex3_generate_data(N, dim)
     if dim == 2
         % Generate 2D linear dataset
         X = 4 * randn(N, 1);

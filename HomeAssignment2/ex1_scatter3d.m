@@ -1,5 +1,5 @@
 % Plotting 3D kNN
-function [] = knn_scatter3d(train_data, train_labels, test_data, predicted_labels)
+function [] = ex1_scatter3d(train_data, train_labels, test_data, predicted_labels)
     figure('Name',  'kNN');
     scatter3(train_data(:,1), train_data(:,2), train_data(:,3), [], train_labels);
     hold on

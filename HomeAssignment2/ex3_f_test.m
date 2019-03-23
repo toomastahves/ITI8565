@@ -1,5 +1,5 @@
 % Returns array, where 0 - passed test, 1 - failed test
-function [idx] = linreg_f_test(X, Y, alpha)
+function [idx] = ex3_f_test(X, Y, alpha)
     N = size(X, 1);
     % Iterating over N points and returning 'passed'/'not passed' for each point 
     idx = arrayfun(@(x) sum(get_Ftest(X, Y, x, alpha)), (1:N)');
@@ -22,7 +22,7 @@ end
 
 % Calculating residual sum of squares
 function RSS = get_RSS(X, Y)
-    [slope, intercept] = linreg_mean_squares(X, Y);
+    [slope, intercept] = ex3_mean_squares(X, Y);
     Y_hat = (intercept + sum(slope .* X', 1))';
     RSS = sum((Y - Y_hat).^2);
 end

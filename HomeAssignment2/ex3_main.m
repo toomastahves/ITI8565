@@ -1,9 +1,9 @@
 % Entry point for running linear regression functions
-function [corr_matrix] = linreg_main(X, Y, max_iterations, R_squared_limit, alpha)
+function [corr_matrix] = ex3_main(X, Y, max_iterations, R_squared_limit, alpha)
     % Calculate multicollinearity matrix
-    corr_matrix = linreg_correlation_coefficients(X);
+    corr_matrix = ex3_correlation_coefficients(X);
     % Running stepwise regression
-    [R_squared_performance, X, Y, slope, intercept] = linreg_stepwise_regression(X, Y, max_iterations, R_squared_limit, alpha);
+    [R_squared_performance, X, Y, slope, intercept] = ex3_stepwise_regression(X, Y, max_iterations, R_squared_limit, alpha);
     % Plotting learning rate
     figure('Name',  'Learning rate');
     plot(R_squared_performance(:,1), R_squared_performance(:,2));

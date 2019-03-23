@@ -1,12 +1,18 @@
 % Returns dataset
-function [X, Y] = dt_dataset(n)
+function [X, Y, predictor_names] = ex2_get_dataset(n)
     if n == 1
+        % From lecture 5
+        predictor_names = ["Outlook","Temperature","Humidity","Wind"];
         [X, Y] = dt_dataset1();
     end
     if n == 2
+        % From https://medium.com/@rakendd/building-decision-trees-and-its-math-711862eea1c0
+        predictor_names = ["Taste","Temperature","Texture"];
         [X, Y] = dt_dataset2();
     end
     if n == 3
+        % From https://www.saedsayad.com/decision_tree.htm
+        predictor_names = ["Outlook","Temp","Humidity","Windy"];
         [X, Y] = dt_dataset3();
     end
 end

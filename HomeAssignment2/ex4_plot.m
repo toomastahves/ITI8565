@@ -1,5 +1,5 @@
 % Plotting gradient descent line movement
-function [] = gd_plot(X, Y, history_slope, history_intercept)
+function [] = ex4_plot(X, Y, history_slope, history_intercept)
     figure('Name',  'Gradient descent');
     scatter(X, Y)
     title('Gradient descent line search');

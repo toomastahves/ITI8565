@@ -1,5 +1,5 @@
 % Gradient descent method for calculating slope and intercept of line
-function [history_slope, history_intercept, history_cost] = gd_calculate(X, Y, max_steps, rate)
+function [history_slope, history_intercept, history_cost] = ex4_gradient_descent(X, Y, max_steps, rate)
     current_slope = 0;
     current_intercept = 0;
     history_slope = zeros(max_steps, 1);

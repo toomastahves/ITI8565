@@ -1,5 +1,5 @@
 % Calculates correlation coefficients for multicollinearity check
-function corr_matrix = linreg_correlation_coefficients(X)
+function corr_matrix = ex3_correlation_coefficients(X)
     N = size(X, 2);
     corr_matrix = zeros(N, N);
     for i=1:N
