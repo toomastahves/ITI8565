@@ -5,8 +5,8 @@ function [X, Y] = ex3_generate_data(N, dim)
         X = 4 * randn(N, 1);
         Y = -1 * X + 4 + randn(N, 1);
         % Add significant noise
-        X = [X; -10 + 20*rand(20,1)];
-        Y = [Y; -10 + 20*rand(20,1)];
+        X = [X; -10 + 20*rand(round(N/10),1)];
+        Y = [Y; -10 + 20*rand(round(N/10),1)];
         % Shuffle
         new_idx = randperm(size(X, 1));
         X = X(new_idx);

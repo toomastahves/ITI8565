@@ -2,13 +2,15 @@
 function [best_acc, best_k, best_dist] = ex1_find_best_k(train_data, train_labels, test_data, test_labels)
     N = size(test_data, 1);
     accuracy = zeros(N, 3);
+    % Available distance functions: Manhattan, Euclidean, Chebyshev
     dist_parameters = [1, 2, Inf];
-    
-    for i=1:N
+    % Loop over potentsial k values
+    for k=1:N
+        % Loop over distance functions
         for j=1:3
             dist_param = dist_parameters(j);
-            predicted_labels = ex1_knn_classifier(train_data, train_labels, test_data, i, dist_param);
-            accuracy(i,j) = sum(test_labels == predicted_labels) / size(predicted_labels, 1);
+            predicted_labels = ex1_knn_classifier(train_data, train_labels, test_data, k, dist_param);
+            accuracy(k,j) = sum(test_labels == predicted_labels) / size(predicted_labels, 1);
         end
     end
     % Select best k according to highest accuracy

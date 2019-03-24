@@ -7,7 +7,7 @@ function [] = ex1_plot(train_data, train_labels, test_data, test_labels, predict
     if dim == 3
         scatter3d(train_data, train_labels, test_data, test_labels, predicted_labels)
     end
-    if dim >= 3
+    if dim > 3
         disp('Too many dimensions to plot');
     end
 end
@@ -31,6 +31,7 @@ function [] = scatter2d(train_data, train_labels, test_data, test_labels, predic
     hold on
     % Other
     title('Data with kNN predicted labels');
+    legend('Incorrect prediction','Correct prediction');
     xlabel('Feature 1');
     ylabel('Feature 2');
     axis equal;

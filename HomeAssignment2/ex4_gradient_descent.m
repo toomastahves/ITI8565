@@ -9,7 +9,7 @@ function [history_slope, history_intercept, history_cost] = ex4_gradient_descent
     for i=1:max_steps
         history_slope(i,:) = current_slope;
         history_intercept(i,:) = current_intercept;
-        history_cost(i) = sum((Y - (current_slope * X + current_intercept)).^2) / size(Y, 1);
+        history_cost(i,:) = sum((Y - (current_slope * X + current_intercept)).^2) / size(Y, 1);
         [current_slope, current_intercept] = gd_step(X, Y, current_slope, current_intercept, rate);
     end
 end
@@ -17,10 +17,14 @@ end
 % Single step to calculate slope and intercept
 function [slope, intercept] = gd_step(X, Y, slope, intercept, rate)
     N = size(Y, 1);
-    Y_hat = slope .* X + intercept;
+    % Y-hat = predicted Y
+    Y_hat = slope * X + intercept;
     % Error function to be minimized
-    error = (Y - Y_hat) / N;
+    error = (Y - Y_hat);
+    % Derivatives
+    D_slope = (-2/N) * sum(X .* error);
+    D_intercept = (-2/N) * sum(error);
     % Calculating new values
-    slope = slope - (rate * sum(-X .* error));
-    intercept = intercept - (rate * sum(-1 .* error));
+    slope = slope - rate * D_slope;
+    intercept = intercept - rate * D_intercept;
 end
