@@ -21,10 +21,10 @@ function [] = ex4_plot(X, Y, history_slope, history_intercept, history_cost, ite
     legend(l2, 'Real line');
     
     % Cost plot
-    figure('Name',  'Gradient descent cost');
-    plot(1:iterations, history_cost);
-    title('Gradient descent cost');
-    xlabel('Iterations');
-    ylabel('Cost');
-    grid;
+    %figure('Name',  'Gradient descent cost');
+    %plot(1:iterations, history_cost);
+    %title('Gradient descent cost');
+    %xlabel('Iterations');
+    %ylabel('Cost');
+    %grid;
 end
