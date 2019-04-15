@@ -35,7 +35,7 @@ function [wh, bh, wo, bo, cost_history] = neural_network_classifier(X, Y_in, rat
         dwo = ah' * (ao - Y);
         dbo = ao - Y;
 
-        % hidden -> output
+        % hidden -> input
         dwh = mtimes(X', sigmoid_derivative(zh) .* ((ao - Y) * wo'));
         dbh = ((ao - Y) * wo') .* sigmoid_derivative(zh);
 

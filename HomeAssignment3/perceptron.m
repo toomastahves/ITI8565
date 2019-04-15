@@ -22,13 +22,4 @@ for i = 1:20000
 end
 
 % Testing
-p = [0, 1, 0];
-result = sigmoid(p * w + b)
-
-function s = sigmoid(z)
-    s = 1 ./ (1 + exp(-z));
-end
-
-function s = sigmoid_derivative(z)
-    s = sigmoid(z) .* (1 - sigmoid(z));
-end
+prediction = sigmoid([0, 1, 0] * w + b);
