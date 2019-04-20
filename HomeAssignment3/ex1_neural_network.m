@@ -36,17 +36,17 @@ function [error_history, wh1, bh1, wh2, bh2, wo, bo] = ex1_neural_network(X, Y_i
         ao = softmax(zo);
 
         % Backpropagation
-        % output -> hidden1
+        % output -> hidden2
         dc_dzo = (ao - Y);
         dwo = ah2' * (sigmoid_derivative(zo) .* dc_dzo);
         dbo = (sigmoid_derivative(zo) .* dc_dzo);
 
-        % hidden1 -> hidden2
+        % hidden2 -> hidden1
         dc_zh2 = (dc_dzo * wo') .* sigmoid_derivative(zh2);
         dwh2 = ah1' * dc_zh2;
         dbh2 = dc_zh2;
 
-        % hidden2 -> input
+        % hidden1 -> input
         dc_zh1 = (dc_zh2 * wh2') .* sigmoid_derivative(zh1);
         dwh1 = X' * dc_zh1;
         dbh1 = dc_zh1;
