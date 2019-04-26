@@ -13,6 +13,7 @@ function [] = ex2_plot(error_history, X, Y, Y_hat)
     % Plotting error evolution
     figure('Name',  'Error evolution over epochs');
     plot(1:50, error_history);
+    title('Error evolution over epochs');
     xlabel('Epochs');
     ylabel('Error');
     grid on;
