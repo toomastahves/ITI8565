@@ -1,6 +1,5 @@
 % Multi class neural network classifier
 function [error_history, wh1, bh1, wh2, bh2, wo, bo] = ex1_neural_network(X, Y_in, epochs, rate)
-
     error_history = zeros(epochs, 2);
 
     % Neurons in each layer
@@ -17,11 +16,11 @@ function [error_history, wh1, bh1, wh2, bh2, wo, bo] = ex1_neural_network(X, Y_i
 
     % Initial weights and biases from Gaussian distribution. Optimized with factor 1 / sqrt(N)
     wh1 = randn(input_neurons, hidden1_neurons) / sqrt(N);
-    bh1 = randn(hidden1_neurons, 1)' / sqrt(N);
+    bh1 = randn(1, hidden1_neurons) / sqrt(N);
     wh2 = randn(hidden1_neurons, hidden2_neurons) / sqrt(N);
-    bh2 = randn(hidden2_neurons, 1)' / sqrt(N);
+    bh2 = randn(1, hidden2_neurons) / sqrt(N);
     wo = randn(hidden2_neurons, output_neurons) / sqrt(N);
-    bo = randn(output_neurons, 1)' / sqrt(N);
+    bo = randn(1, output_neurons) / sqrt(N);
 
     for epoch = 1:epochs
         % Feedforward
@@ -39,7 +38,7 @@ function [error_history, wh1, bh1, wh2, bh2, wo, bo] = ex1_neural_network(X, Y_i
         % output -> hidden2
         dc_dzo = (ao - Y);
         dwo = ah2' * (sigmoid_derivative(zo) .* dc_dzo);
-        dbo = (sigmoid_derivative(zo) .* dc_dzo);
+        dbo = sigmoid_derivative(zo) .* dc_dzo;
 
         % hidden2 -> hidden1
         dc_zh2 = (dc_dzo * wo') .* sigmoid_derivative(zh2);

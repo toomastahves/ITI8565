@@ -1,7 +1,23 @@
-% Creating data with labels -1 and 1
-function [cluster, labels] = ex2_create_data(N)
-    cluster1 = 2*randn(N, 2) + [0, -3];
-    cluster2 = 2*randn(N, 2) + [3, 3];
-    cluster = [cluster1; cluster2];
-    labels = [1*ones(N,1); -1*ones(N,1)];
+function [x, y] = ex2_create_data()
+    x = (1:150)';
+    
+    y1 = randi([0,50],10,1) / 10;
+    y2 = randi([60,110],10,1) / 10;
+    y3 = randi([120,160],10,1) / 10;
+    y4 = randi([60,110],10,1) / 10;
+    y5 = randi([0,50],10,1) / 10;
+    
+    y6 = randi([120,160],10,1) / 10;
+    y7 = randi([170,210],10,1) / 10;
+    y8 = randi([320,330],10,1) / 10;
+    y9 = randi([170,210],10,1) / 10;
+    y10 = randi([120,160],10,1) / 10;
+    
+    y11 = randi([0,50],10,1) / 10;
+    y12 = randi([60,110],10,1) / 10;
+    y13 = randi([120,160],10,1) / 10;
+    y14 = randi([60,110],10,1) / 10;
+    y15 = randi([0,50],10,1) / 10;
+    
+    y = [y1; y2; y3; y4; y5; y6; y7; y8; y9; y10; y11; y12; y13; y14; y15];
 end
