@@ -1,1 +1,4 @@
 .asv
+Project/venv
+.vscode
+Project/__pycache__
