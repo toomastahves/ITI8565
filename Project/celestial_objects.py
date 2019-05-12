@@ -15,8 +15,8 @@ data = drop_columns(data)
 x_train, y_train, x_test, y_test = split_data(data, 'class')
 
 # Train models using different algorithms
-accuracy = get_predictions(x_train, y_train, data)
-print(accuracy)
+#accuracy = get_predictions(x_train, y_train, data)
+#print(accuracy)
 
 # Predict using Random Forest
 model_rf = RandomForestClassifier(random_state = 100, n_estimators = 10)
@@ -46,7 +46,7 @@ plt.grid()
 #correlation_heatmap(data)
 #pairplot(data, 'class')
 #pca_plot(x_train, y_train)
-#countplot(data, 'class')
+countplot(data, 'class')
 #redshift_plot(data)
 
 plt.show()

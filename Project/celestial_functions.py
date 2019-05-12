@@ -153,11 +153,13 @@ def pca_plot(x_train, y_train):
 
     color_dict = {'STAR':'blue','GALAXY':'green','QSO':'orange'}
 
-    pca = PCA(n_components = d)
+    pca = PCA(n_components = 2)
     d_reduced = pca.fit_transform(x_train)
     d_reduced = np.array(d_reduced).T
-    plt.figure('PCA plot')
-    plt.scatter(d_reduced[0], d_reduced[1], s = 5, color=[color_dict[i] for i in y_train])
+    plt.figure('Train data after PCA')
+    plt.title('Train data after PCA')
+    sns.scatterplot(x=d_reduced[0], y=d_reduced[1], hue=y_train, palette="Set2")
+    #plt.scatter(d_reduced[0], d_reduced[1], s = 5, color=[color_dict[i] for i in y_train])
     plt.xlabel("Principal component 1")
     plt.ylabel("Principal component 2")
     plt.grid()
