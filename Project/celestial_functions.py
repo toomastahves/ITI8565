@@ -42,10 +42,11 @@ def drop_columns(data):
     data = data.drop(['spectroFlux_u','spectroFlux_g','spectroFlux_r','spectroFlux_i','spectroFlux_z'], axis=1)
     # Adaptive fourth moment of object
     data = data.drop(['mCr4_u','mCr4_g','mCr4_r','mCr4_i','mCr4_z'], axis=1)
+    data = data.drop(['wCoverage'], axis=1)
     return data
 
 def split_data(data, column):
-    train, test = train_test_split(data, test_size=0.3, random_state=100)
+    train, test = train_test_split(data, test_size=0.3, random_state=100, shuffle=True)
     x_train = train.drop(column, axis=1)
     y_train = train[column]
     x_test = test.drop(column,axis=1)
@@ -131,25 +132,25 @@ def get_predictions(x_train, y_train, data):
     accuracy = accuracy.append({'Algorithm': 'SVM', 'Accuracy': scores.mean(), 'Time': end - start}, ignore_index=True)
 
     # Multilayer Perceptron
-    #start = time.perf_counter()
-    #model_mlp = MLPClassifier(hidden_layer_sizes = (1000,1000), max_iter = 1000)
-    #scores = cross_val_score(model_mlp, x_train, y_train, cv=5, scoring="accuracy")
-    #end = time.perf_counter()
-    #accuracy = accuracy.append({'Algorithm': 'MLP', 'Accuracy': scores.mean(), 'Time': end - start}, ignore_index=True)
+    start = time.perf_counter()
+    model_mlp = MLPClassifier(hidden_layer_sizes = (100,100), max_iter = 1000)
+    scores = cross_val_score(model_mlp, x_train, y_train, cv=5, scoring="accuracy")
+    end = time.perf_counter()
+    accuracy = accuracy.append({'Algorithm': 'MLP', 'Accuracy': scores.mean(), 'Time': end - start}, ignore_index=True)
 
     return accuracy
 
-def pca_plot(x_train, y_train):
+def pca_plot_train(x_train, y_train):
     pca_d = PCA()
     pca_d.fit(x_train)
     cumsum = np.cumsum(pca_d.explained_variance_ratio_)
     d = np.argmax(cumsum >= 0.95) + 1
-    plt.figure('PCA best fit')
-    plt.plot(cumsum)
-    plt.axvline(d,c='r',linestyle='--')
-    plt.xlabel("Dimensions")
-    plt.ylabel("Importance")
-    plt.grid()
+    #plt.figure('PCA best fit')
+    #plt.plot(cumsum)
+    #plt.axvline(d,c='r',linestyle='--')
+    #plt.xlabel("Dimensions")
+    #plt.ylabel("Importance")
+    #plt.grid()
 
     color_dict = {'STAR':'blue','GALAXY':'green','QSO':'orange'}
 
@@ -158,8 +159,8 @@ def pca_plot(x_train, y_train):
     d_reduced = np.array(d_reduced).T
     plt.figure('Train data after PCA')
     plt.title('Train data after PCA')
-    sns.scatterplot(x=d_reduced[0], y=d_reduced[1], hue=y_train, palette="Set2")
-    #plt.scatter(d_reduced[0], d_reduced[1], s = 5, color=[color_dict[i] for i in y_train])
+    #sns.scatterplot(x=d_reduced[0], y=d_reduced[1], hue=y_train, palette="Set2")
+    plt.scatter(d_reduced[0], d_reduced[1], s = 1, color=[color_dict[i] for i in y_train])
     plt.xlabel("Principal component 1")
     plt.ylabel("Principal component 2")
     plt.grid()
