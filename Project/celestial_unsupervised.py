@@ -20,7 +20,7 @@ def pca_plot(data, y_pred, algorithm):
     plt.grid()
 
 # Prepare data
-data = pd.read_csv('data_10000.csv')
+data = pd.read_csv('objects_10000.csv')
 data = drop_columns(data)
 data = data.drop('class', axis=1)
 

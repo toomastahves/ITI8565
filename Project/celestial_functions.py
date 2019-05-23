@@ -72,7 +72,8 @@ def correlation_heatmap(data):
     ax.set_title('Correlation between features')
 
 def pairplot(data, column):
-    sns.pairplot(data,kind='scatter',hue=column,palette="Set2")
+        plt.figure('Pairplot')
+        sns.pairplot(data,kind='scatter',hue=column,palette="Set2")
 
 def countplot(data, column):
     plt.figure('Countplot')
@@ -80,7 +81,8 @@ def countplot(data, column):
     sns.countplot(y=column, data=data, hue=column)
 
 def redshift_plot(data):
-    sns.scatterplot(data["class"],data["redshift"],hue=data["class"],s=10)
+        plt.figure('Redshiftplot')
+        sns.scatterplot(data["class"],data["redshift"],hue=data["class"],s=10)
 
 def temperature_plot(data):
     sns.scatterplot(data["spectraltype"],data["temperature"],hue=data["spectraltype"],s=10, legend=False)
@@ -132,19 +134,20 @@ def get_predictions(x_train, y_train, data):
     accuracy = accuracy.append({'Algorithm': 'SVM', 'Accuracy': scores.mean(), 'Time': end - start}, ignore_index=True)
 
     # Multilayer Perceptron
-    start = time.perf_counter()
-    model_mlp = MLPClassifier(hidden_layer_sizes = (100,100), max_iter = 1000)
-    scores = cross_val_score(model_mlp, x_train, y_train, cv=5, scoring="accuracy")
-    end = time.perf_counter()
-    accuracy = accuracy.append({'Algorithm': 'MLP', 'Accuracy': scores.mean(), 'Time': end - start}, ignore_index=True)
+    #start = time.perf_counter()
+    #model_mlp = MLPClassifier(hidden_layer_sizes = (100,100), max_iter = 1000)
+    #scores = cross_val_score(model_mlp, x_train, y_train, cv=5, scoring="accuracy")
+    #end = time.perf_counter()
+    #accuracy = accuracy.append({'Algorithm': 'MLP', 'Accuracy': scores.mean(), 'Time': end - start}, ignore_index=True)
 
     return accuracy
 
 def pca_plot_train(x_train, y_train):
-    pca_d = PCA()
-    pca_d.fit(x_train)
-    cumsum = np.cumsum(pca_d.explained_variance_ratio_)
-    d = np.argmax(cumsum >= 0.95) + 1
+    # Find best cut off point
+    #pca_d = PCA()
+    #pca_d.fit(x_train)
+    #cumsum = np.cumsum(pca_d.explained_variance_ratio_)
+    #d = np.argmax(cumsum >= 0.95) + 1
     #plt.figure('PCA best fit')
     #plt.plot(cumsum)
     #plt.axvline(d,c='r',linestyle='--')
@@ -164,7 +167,24 @@ def pca_plot_train(x_train, y_train):
     plt.xlabel("Principal component 1")
     plt.ylabel("Principal component 2")
     plt.grid()
-    
+
+
+def pca_plot_test(x_test, y_pred):
+        # Class to color mapping 
+        color_dict = {'STAR':'blue','GALAXY':'green','QSO':'orange'}
+        # PCA
+        pca = PCA(n_components = 2)
+        pca_data = pca.fit_transform(x_test)
+        pca_data = pca_data.T
+        # Plot predictions
+        plt.figure('Random Forest after PCA')
+        plt.title('Test data predictions after PCA')
+        plt.scatter(pca_data[0], pca_data[1], s = 1, color=[color_dict[i] for i in y_pred])
+        plt.xlabel("Principal component 1")
+        plt.ylabel("Principal component 2")
+        plt.grid()
+
+
 def filter_spectraltypes(data, N):
     col = 'spectraltype'
     filtered = pd.DataFrame()
@@ -173,4 +193,3 @@ def filter_spectraltypes(data, N):
         if counts >= N:
             filtered = pd.concat([data[data[col]==i], filtered])
     return filtered
-
